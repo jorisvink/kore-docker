@@ -40,5 +40,9 @@ RUN set -e && \
   rm -rf kore* && \
   apk del .build-deps
 
+COPY entry.sh /
+
 EXPOSE 443 8888
-ENTRYPOINT [ "kore" ]
+STOPSIGNAL SIGQUIT
+
+ENTRYPOINT ["/entry.sh"]
