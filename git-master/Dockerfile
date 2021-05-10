@@ -7,12 +7,13 @@ RUN apk add --no-cache \
   libpq \
   python3
 
-RUN addgroup -g 500 keymgr && \
+RUN mkdir -p /var/chroot && \
+  addgroup -g 500 keymgr && \
   adduser -D -u 500 -h /var/chroot/keymgr -s /sbin/nologin -G keymgr keymgr && \
   addgroup -g 501 acme && \
   adduser -D -u 501 -h /var/chroot/acme -s /sbin/nologin -G acme acme && \
   addgroup -g 502 kore && \
-  adduser -D -u 502 -h /var/chroot/kore -s /sbin/nologin -G kore kore
+  adduser -D -u 502 -h /koreapp -s /sbin/nologin -G kore kore
 
 ADD https://git.kore.io/kore.git/refs/heads/master master.commit
 
