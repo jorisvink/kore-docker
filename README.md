@@ -35,3 +35,74 @@ $ docker run -p 8888:8888 -it --rm \
     -v `pwd`/keymgr:/var/chroot/keymgr \
     -w /app kore/kore:4.1.0 /app/app.py
 ```
+
+## Deployment target
+
+When using Python, you should set the deployment target to "docker".
+This will keep Kore in the foreground but still apply privilege separation.
+
+```python
+kore.config.deployment = "docker"
+```
+
+## Users and paths
+
+The docker images provide users for all privilege separated processes.
+
+These users are:
+
+### kore
+
+The kore user its homedir is located under **/var/chroot/kore** and is
+intended to be the main user for the worker processes.
+
+### Default configuration
+
+runas kore
+root /var/chroot/kore
+
+### Python configuration
+
+```python
+kore.config.runas = "kore"
+kore.config.root = "/var/chroot/kore"
+```
+
+## acme
+
+The acme user its homedir is located under **/var/chroot/acme** and
+is intended to be the main ACME process user.
+
+The acme process is the process that talks to the ACME servers and
+parsers their responses.
+
+### Default configuration
+
+acme_runas acme
+acme_root /var/chroot/acme
+
+### Python configuration
+
+```python
+kore.config.acme_runas = "acme"
+kore.config.acmer_root = "/var/chroot/acme"
+```
+
+## keymgr
+
+The keymgr user its homedir is located under **/var/chroot/keymgr**
+and is intended to be the keymgr process user.
+
+The keymgr process holds all your private keys.
+
+### Default configuration
+
+keymgr_runas keymgr
+keymgr_root /var/chroot/keymgr
+
+### Python configuration
+
+```python
+kore.config.keymgr_runas = "keymgr"
+kore.config.keymgr_root = "/var/chroot/keymgr"
+```
