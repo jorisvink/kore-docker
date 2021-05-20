@@ -20,6 +20,24 @@ $ docker run -p 8888:8888 -it --rm \
     -w /app kore/kore:4.1.0 /app/app.py
 ```
 
+## Using the kodev docker image
+
+You can use the kodev docker image to build your application.
+
+While doing so it is important you set the workdir to the name
+of your application so kodev build will correctly pickup the
+configuration.
+
+The kore/kodev container has 2 tags, amd64 and arm64.
+
+Building an application:
+
+```
+$ docker run -it --rm \
+    -v `pwd`:/myapp \
+    -w /myapp kore/kodev:arm64 build
+```
+
 ## ACME
 
 The docker images support ACME. If you are going to enable it
