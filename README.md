@@ -28,14 +28,14 @@ While doing so it is important you set the workdir to the name
 of your application so kodev build will correctly pickup the
 configuration.
 
-The kore/kodev container has 2 tags, amd64 and arm64.
+The kore/kodev container has 2 tags, kodev-amd64 and kodev-arm64.
 
 Building an application:
 
 ```
 $ docker run -it --rm \
     -v `pwd`:/myapp \
-    -w /myapp kore/kodev:arm64 build
+    -w /myapp kore/kodev:kodev-arm64 build
 ```
 
 ## ACME
