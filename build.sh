@@ -14,10 +14,10 @@ if [ "$IMAGE" = "kodev" ]; then
 	REPO=kodev
 fi
 
-docker build -t kore/$REPO:$IMAGE-amd64 --platform linux/amd64 $IMAGE
+docker build --no-cache -t kore/$REPO:$IMAGE-amd64 --platform linux/amd64 $IMAGE
 docker push kore/$REPO:$IMAGE-amd64
 
-docker build -t kore/$REPO:$IMAGE-arm64 $IMAGE
+docker build --no-cache -t kore/$REPO:$IMAGE-arm64 $IMAGE
 docker push kore/$REPO:$IMAGE-arm64
 
 docker manifest rm kore/$REPO:$IMAGE
